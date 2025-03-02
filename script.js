@@ -92,29 +92,15 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    async function updateVisitorCount() {
-        try {
-            const response = await fetch('https://api.counter.dev/track?id=solubilidade.github.io', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    page: window.location.pathname,
-                })
-            });
-            
-            const data = await response.json();
-            if (data && data.count) {
-                document.getElementById('visitor-count').textContent = data.count;
-            }
-        } catch (error) {
-            console.error('Error updating visitor count:', error);
-            document.getElementById('visitor-count').textContent = '-';
-        }
+    function initializeCounter() {
+        const script = document.createElement('script');
+        script.src = "https://cdn.counter.dev/script.js";
+        script.setAttribute("data-id", "4014fdb2-6fb1-42c0-8a8a-0dbf59755884");
+        script.setAttribute("data-utcoffset", "-3");
+        document.head.appendChild(script);
     }
 
-    updateVisitorCount();
+    initializeCounter();
     initializeTimezone();
 
     const text = "full time retard"
