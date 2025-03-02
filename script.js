@@ -28,19 +28,17 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateTimes() {
         const now = new Date();
         
-        // Update visitor's local time based on their timezone
         document.getElementById('visitor-time').textContent = formatTimeOnly(now);
         
-        // Update my time (BRT)
-        const utcTime = new Date(now.getTime() + now.getTimezoneOffset() * 60000); // Convert to UTC
-        const brasiliaTime = new Date(utcTime.getTime() - (3 * 60 * 60 * 1000)); // Convert to BRT
+        const utcTime = new Date(now.getTime() + now.getTimezoneOffset() * 60000);
+        const brasiliaTime = new Date(utcTime.getTime() - (3 * 60 * 60 * 1000));
         document.getElementById('my-time').textContent = formatTimeOnly(brasiliaTime);
     }
 
     function initializeTimezone() {
-        getVisitorTimezone(); // Get and display visitor's timezone immediately
-        updateTimes(); // Update times immediately
-        setInterval(updateTimes, 1000); // Update times every second
+        getVisitorTimezone();
+        updateTimes();
+        setInterval(updateTimes, 1000);
     }
 
     function startWebsite() {
@@ -94,7 +92,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Initialize unique visitor count
     async function updateVisitorCount() {
         try {
             const response = await fetch('https://api.ipify.org?format=json');
@@ -118,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function() {
     updateVisitorCount();
     initializeTimezone();
 
-    const text = "full time retard";
+    const text = "full time retard"
     let direction = 'forward';
     let currentText = "";
     let charIndex = 0;
