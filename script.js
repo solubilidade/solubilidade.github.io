@@ -4,6 +4,38 @@ document.addEventListener('DOMContentLoaded', function() {
     const spotifyEmbed = document.getElementById('spotify-embed');
     let websiteStarted = false;
 
+    // Debug code for counter.dev
+    setTimeout(() => {
+        if (window._counter) {
+            console.log('Counter.dev script loaded successfully');
+        } else {
+            console.error('Counter.dev script not loaded');
+            // Fallback counter implementation
+            updateVisitorCount();
+        }
+    }, 2000);
+
+    // Fallback counter implementation
+    async function updateVisitorCount() {
+        try {
+            await fetch('https://counter.dev/track', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    id: '4014fdb2-6fb1-42c0-8a8a-0dbf59755884',
+                    hostname: 'solubilidade.github.io',
+                    pathname: window.location.pathname,
+                    referrer: document.referrer,
+                    screen: `${window.screen.width}x${window.screen.height}`,
+                })
+            });
+        } catch (error) {
+            console.error('Error updating visitor count:', error);
+        }
+    }
+
     function getVisitorTimezone() {
         try {
             const date = new Date();
@@ -28,10 +60,12 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateTimes() {
         const now = new Date();
         
+        // Update visitor's local time based on their timezone
         document.getElementById('visitor-time').textContent = formatTimeOnly(now);
         
-        const utcTime = new Date(now.getTime() + now.getTimezoneOffset() * 60000);
-        const brasiliaTime = new Date(utcTime.getTime() - (3 * 60 * 60 * 1000));
+        // Update my time (BRT)
+        const utcTime = new Date(now.getTime() + now.getTimezoneOffset() * 60000); // Convert to UTC
+        const brasiliaTime = new Date(utcTime.getTime() - (3 * 60 * 60 * 1000)); // Convert to BRT
         document.getElementById('my-time').textContent = formatTimeOnly(brasiliaTime);
     }
 
@@ -92,18 +126,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    function initializeCounter() {
-        const script = document.createElement('script');
-        script.src = "https://cdn.counter.dev/script.js";
-        script.setAttribute("data-id", "4014fdb2-6fb1-42c0-8a8a-0dbf59755884");
-        script.setAttribute("data-utcoffset", "-3");
-        document.head.appendChild(script);
-    }
-
-    initializeCounter();
     initializeTimezone();
 
-    const text = "full time retard"
+    const text = "full time retard";
     let direction = 'forward';
     let currentText = "";
     let charIndex = 0;
