@@ -15,7 +15,6 @@ body {
     overflow: hidden;
 }
 
-/* Start Screen Styles */
 .start-screen {
     position: fixed;
     top: 0;
@@ -45,7 +44,6 @@ body {
     100% { opacity: 0; transform: scale(0.98); }
 }
 
-/* Main Content Styles */
 #main-content {
     transition: filter 0.5s ease-out;
 }
@@ -231,7 +229,6 @@ body {
     transform: perspective(1000px) rotateX(5deg) rotateY(5deg);
 }
 
-/* Animation Classes */
 .fade-in {
     opacity: 0;
     animation: fadeIn 1s ease-in forwards;
@@ -263,7 +260,6 @@ body {
     50% { opacity: 0; }
 }
 
-/* Equalizer Animation */
 .equalizer {
     display: flex;
     justify-content: center;
