@@ -11,15 +11,58 @@ body {
     color: var(--text-color);
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     min-height: 100vh;
+    font-size: 14px;
+    overflow: hidden;
+}
+
+/* Start Screen Styles */
+.start-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: var(--background-color);
+    z-index: 1000;
+    cursor: pointer;
+    transition: opacity 0.5s ease-out;
+}
+
+.start-text {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    text-transform: lowercase;
+    letter-spacing: 2px;
+    animation: fadeInPulse 3s infinite;
+}
+
+@keyframes fadeInPulse {
+    0% { opacity: 0; transform: scale(0.98); }
+    50% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(0.98); }
+}
+
+/* Main Content Styles */
+#main-content {
+    transition: filter 0.5s ease-out;
+}
+
+.blurred {
+    filter: blur(10px);
 }
 
 .container {
     text-align: center;
     max-width: 800px;
     padding: 2rem;
+    margin: 0 auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .profile {
@@ -27,38 +70,181 @@ body {
 }
 
 .profile-pic {
-    width: 150px;
-    height: 150px;
+    width: 130px;
+    height: 130px;
     border-radius: 50%;
     margin-bottom: 1rem;
-    border: 3px solid var(--primary-color);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
 }
 
 .name {
-    font-size: 2.5rem;
+    font-size: 2rem;
     margin: 0;
-    color: var(--primary-color);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.description {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    color: #888;
+    height: 1.2em;
+}
+
+.datetime {
+    position: static;
+    background: none;
+    padding: 0;
+    font-size: 1rem;
+    opacity: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    line-height: 1;
+    color: rgba(255, 255, 255, 1);
+}
+
+.datetime span:first-child {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.time-divider {
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 300;
+}
+
+.datetime i {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
 }
 
 .visitor-count {
-    margin: 2rem 0;
-    font-size: 1.2rem;
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    font-size: 0.9rem;
     opacity: 0.8;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    z-index: 100;
+}
+
+.visitor-count .fa-eye {
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .spotify-container {
     margin-top: 2rem;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(29, 185, 84, 0.1);
+    padding: 1rem;
+    border-radius: 1rem;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(29, 185, 84, 0.2);
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#spotify-embed {
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.icon-container {
+    position: relative;
+    cursor: pointer;
+}
+
+.fab.fa-discord {
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.9);
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+.fab.fa-discord:hover {
+    opacity: 1;
+    filter: brightness(1.2);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+}
+
+.anilist-icon {
+    width: 1.7rem;
+    height: 1.7rem;
+    filter: brightness(0) saturate(100%) invert(90%);
+    transition: opacity 0.3s ease;
+}
+
+.anilist-icon:hover {
+    filter: brightness(0) saturate(100%) invert(100%);
+    opacity: 1;
+}
+
+.username-tooltip {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.8);
+    color: var(--text-color);
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.8rem;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.icon-container:hover .username-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(-5px);
+}
+
+.hover-tilt {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+}
+
+.hover-tilt:hover {
+    transform: perspective(1000px) rotateX(5deg) rotateY(5deg);
 }
 
 /* Animation Classes */
 .fade-in {
     opacity: 0;
     animation: fadeIn 1s ease-in forwards;
+    animation-play-state: paused;
 }
 
 .floating {
-    animation: float 3s ease-in-out infinite;
+    animation: float 5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    animation-play-state: paused;
+}
+
+.cursor {
+    animation: blink 1s infinite;
 }
 
 @keyframes fadeIn {
@@ -68,32 +254,102 @@ body {
 
 @keyframes float {
     0% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
+    50% { transform: translateY(-8px); }
     100% { transform: translateY(0px); }
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
 }
 
 /* Equalizer Animation */
 .equalizer {
     display: flex;
     justify-content: center;
-    gap: 5px;
+    align-items: flex-end;
+    gap: 3px;
     height: 30px;
-    margin-bottom: 1rem;
+    width: 300px;
+    padding: 0.5rem 0;
 }
 
 .bar {
-    width: 4px;
+    width: 3px;
     background: var(--primary-color);
-    animation: equalize 1s ease-in-out infinite;
+    border-radius: 1px;
+    animation: equalize 1.2s ease-in-out infinite;
+    transform-origin: bottom;
+    animation-play-state: paused;
 }
 
-.bar:nth-child(1) { animation-delay: 0.0s; }
-.bar:nth-child(2) { animation-delay: 0.2s; }
-.bar:nth-child(3) { animation-delay: 0.4s; }
-.bar:nth-child(4) { animation-delay: 0.6s; }
+.bar:nth-child(1) { animation-delay: -0.4s; }
+.bar:nth-child(2) { animation-delay: -0.2s; }
+.bar:nth-child(3) { animation-delay: 0.0s; }
+.bar:nth-child(4) { animation-delay: 0.2s; }
+.bar:nth-child(5) { animation-delay: 0.4s; }
+.bar:nth-child(6) { animation-delay: 0.6s; }
+.bar:nth-child(7) { animation-delay: 0.8s; }
+.bar:nth-child(8) { animation-delay: 1.0s; }
+.bar:nth-child(9) { animation-delay: 1.2s; }
+.bar:nth-child(10) { animation-delay: 1.4s; }
 
 @keyframes equalize {
-    0% { height: 5px; }
-    50% { height: 25px; }
-    100% { height: 5px; }
+    0%, 100% { height: 8px; }
+    25% { height: 22px; }
+    50% { height: 12px; }
+    75% { height: 30px; }
+}
+
+.timezones-container {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.timezone-box {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 0.8rem;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.timezone-label {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: lowercase;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.timezone-label i {
+    color: var(--primary-color);
+    font-size: 0.9rem;
+}
+
+.datetime {
+    position: static;
+    background: none;
+    padding: 0;
+    font-size: 1rem;
+    opacity: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    line-height: 1;
+    color: rgba(255, 255, 255, 1);
+}
+
+.datetime span:first-child {
+    color: rgba(255, 255, 255, 0.8);
 }

@@ -5,32 +5,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>solu's website</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <div class="profile fade-in">
-            <img src="https://github.com/solubilidade.png" alt="solu" class="profile-pic floating">
-            <h1 class="name floating">solu</h1>
-        </div>
-        
+    <div id="start-screen" class="start-screen">
+        <div class="start-text">click anywhere</div>
+    </div>
+
+    <div id="main-content" class="blurred">
         <div class="visitor-count fade-in">
-            <p>Visitors: <span id="visitor-count">0</span></p>
+            <i class="fas fa-eye"></i> <span id="visitor-count">0</span>
         </div>
 
-        <div class="spotify-container fade-in">
-            <div class="equalizer">
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
+        <div class="container">
+            <div class="profile fade-in">
+                <img src="https://github.com/solubilidade.png" alt="solu" class="profile-pic floating">
+                <h1 class="name">solu</h1>
+                <div class="description">
+                    <span id="typewriter"></span>
+                    <span class="cursor">|</span>
+                </div>
+                <div class="social-links fade-in">
+                    <div class="icon-container">
+                        <i class="fab fa-discord hover-tilt" id="discord-icon"></i>
+                        <span class="username-tooltip">solubilidade</span>
+                    </div>
+                    <div class="icon-container">
+                        <a href="https://anilist.co/user/solu/" target="_blank">
+                            <img src="https://anilist.co/img/icons/icon.svg" alt="AniList" class="anilist-icon hover-tilt">
+                        </a>
+                    </div>
+                </div>
             </div>
-            <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M" 
-                    width="300" 
-                    height="380" 
-                    frameborder="0" 
-                    allowtransparency="true" 
-                    allow="encrypted-media">
-            </iframe>
+            
+            <div class="spotify-container fade-in">
+                <iframe id="spotify-embed"
+                        src="https://open.spotify.com/embed/track/4DQx83WALp1UWDPgvTh1M4?utm_source=generator&theme=0&view=coverart"
+                        width="280"
+                        height="80"
+                        frameborder="0"
+                        allowfullscreen=""
+                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                        loading="lazy"
+                        style="opacity: 0; transition: opacity 1s ease-in-out;">
+                </iframe>
+                <div class="equalizer">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+            </div>
+
+            <div class="timezones-container fade-in">
+                <div class="timezone-box">
+                    <div class="timezone-label">
+                        <i class="fas fa-globe"></i> your timezone
+                    </div>
+                    <div class="datetime">
+                        <span id="visitor-timezone"></span> <span class="time-divider">|</span> <span id="visitor-time"></span>
+                    </div>
+                </div>
+                <div class="timezone-box">
+                    <div class="timezone-label">
+                        <i class="fas fa-globe"></i> my timezone
+                    </div>
+                    <div class="datetime">
+                        <span>BRT</span> <span class="time-divider">|</span> <span id="my-time">21:54:30</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <script src="script.js"></script>
