@@ -4,18 +4,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const spotifyEmbed = document.getElementById('spotify-embed');
     let websiteStarted = false;
 
-    // Debug code for counter.dev
     setTimeout(() => {
         if (window._counter) {
             console.log('Counter.dev script loaded successfully');
         } else {
             console.error('Counter.dev script not loaded');
-            // Fallback counter implementation
             updateVisitorCount();
         }
     }, 2000);
 
-    // Fallback counter implementation
     async function updateVisitorCount() {
         try {
             await fetch('https://counter.dev/track', {
@@ -60,12 +57,10 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateTimes() {
         const now = new Date();
         
-        // Update visitor's local time based on their timezone
         document.getElementById('visitor-time').textContent = formatTimeOnly(now);
         
-        // Update my time (BRT)
-        const utcTime = new Date(now.getTime() + now.getTimezoneOffset() * 60000); // Convert to UTC
-        const brasiliaTime = new Date(utcTime.getTime() - (3 * 60 * 60 * 1000)); // Convert to BRT
+        const utcTime = new Date(now.getTime() + now.getTimezoneOffset() * 60000);
+        const brasiliaTime = new Date(utcTime.getTime() - (3 * 60 * 60 * 1000));
         document.getElementById('my-time').textContent = formatTimeOnly(brasiliaTime);
     }
 
