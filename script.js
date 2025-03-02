@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function() {
     updateVisitorCount();
     initializeTimezone();
 
-    const text = "full time retard"
+    const text = "full time retard";
     let direction = 'forward';
     let currentText = "";
     let charIndex = 0;
