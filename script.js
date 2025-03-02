@@ -94,21 +94,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
     async function updateVisitorCount() {
         try {
-            const response = await fetch('https://api.ipify.org?format=json');
+            const response = await fetch('https://api.counter.dev/track?id=solubilidade.github.io', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    page: window.location.pathname,
+                })
+            });
+            
             const data = await response.json();
-            const clientIP = data.ip;
-            
-            let visitors = JSON.parse(localStorage.getItem('visitors') || '[]');
-            
-            if (!visitors.includes(clientIP)) {
-                visitors.push(clientIP);
-                localStorage.setItem('visitors', JSON.stringify(visitors));
-                document.getElementById('visitor-count').textContent = visitors.length;
-            } else {
-                document.getElementById('visitor-count').textContent = visitors.length;
+            if (data && data.count) {
+                document.getElementById('visitor-count').textContent = data.count;
             }
         } catch (error) {
             console.error('Error updating visitor count:', error);
+            document.getElementById('visitor-count').textContent = '-';
         }
     }
 
