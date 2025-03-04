@@ -5,13 +5,12 @@
     --primary-text: #f0f6fc;
     --secondary-text: #8b949e;
     --accent-color: #58a6ff;
-    --subtitle-text: #6e7681; /* Darker text for subtitle */
+    --subtitle-text: #6e7681;
     --hover-bg: rgba(255, 255, 255, 0.05);
     --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
     --item-bg: rgba(56, 139, 253, 0.1);
     --item-color: #58a6ff;
     
-    /* Tech logo glow colors */
     --cpp-color: #00599C;
     --csharp-color: #9B4F96;
     --c-color: #283593;
@@ -27,7 +26,6 @@
     box-sizing: border-box;
 }
 
-/* Entry Screen - Updated */
 .entry-screen {
     position: fixed;
     top: 0;
@@ -49,7 +47,7 @@
     text-align: center;
     display: flex;
     flex-direction: column;
-    gap: 10px; /* Reduced from 20px to bring elements closer */
+    gap: 10px;
 }
 
 .entry-text {
@@ -64,42 +62,37 @@
 }
 
 .entry-subtext {
-    color: rgba(255, 255, 255, 0.6); /* Darkened from 0.7 to 0.6 */
+    color: rgba(255, 255, 255, 0.6);
     font-size: 1.1rem;
     font-style: italic;
     letter-spacing: 1px;
     text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
     padding: 0 20px;
-    margin-top: -5px; /* Additional negative margin to pull it closer */
+    margin-top: -5px;
 }
 
 .entry-screen:hover .entry-text {
     transform: scale(1.05);
 }
 
-/* Hidden class to remove the entry screen */
 .hidden {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
 }
 
-/* IMPORTANT: Box fade-in animation (was missing before) */
-/* Hide profile boxes initially */
 .card {
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity 2s ease, transform 2s ease; /* Changed from 1.2s to 2s */
+    transition: opacity 2s ease, transform 2s ease;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
 }
 
-/* Class to show profile boxes with fade-in effect */
 .show-cards .card {
     opacity: 1;
     transform: translateY(0);
 }
 
-/* Staggered animation for cards - slower transitions */
 .show-cards .card:nth-child(1) { transition-delay: 0.2s; }
 .show-cards .card:nth-child(2) { transition-delay: 0.4s; }
 .show-cards .card:nth-child(3) { transition-delay: 0.6s; }
@@ -114,11 +107,9 @@
 }
 
 
-/* Volume control should also start hidden and fade in */
 .volume-control {
     opacity: 0;
     transition: opacity 1s ease 1.5s;
-    /* Keep all other volume control styles */
 }
 
 .show-cards .volume-control {
@@ -137,7 +128,6 @@ body {
     padding: 2rem;
 }
 
-/* Overall page fade-in effect */
 .page-container {
     width: 100%;
     opacity: 0;
@@ -170,7 +160,6 @@ body {
     transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/* Subtle zoom effect on card hover */
 .card:hover {
     transform: scale(1.02);
     box-shadow: var(--card-shadow);
@@ -228,7 +217,6 @@ body {
     margin-top: 0.25rem;
     font-size: 1rem;
     color: var(--subtitle-text);
-    /* Removed italic styling */
     height: 1.5rem;
     display: flex;
     align-items: center;
@@ -328,7 +316,7 @@ h2 {
 .discord-image {
     width: 100%;
     height: auto;
-    max-width: 460px; /* Made even bigger */
+    max-width: 460px;
 }
 
 .spotify-image {
@@ -336,7 +324,6 @@ h2 {
     height: auto;
 }
 
-/* Goals list styling - no dots and closer spacing */
 .goals-list {
     list-style: none;
     padding: 0;
@@ -363,7 +350,6 @@ h2 {
     margin-bottom: 0;
 }
 
-/* Responsive adjustments */
 @media (max-width: 1100px) {
     .content-grid {
         grid-template-columns: 1fr 1fr;
@@ -388,7 +374,7 @@ h2 {
     }
     
     .discord-image {
-        max-width: 380px; /* Slightly smaller on mobile */
+        max-width: 380px;
     }
 }
 
@@ -420,11 +406,10 @@ h2 {
     }
     
     .discord-image {
-        max-width: 340px; /* Adjusted for very small screens */
+        max-width: 340px;
     }
 }
 
-/* Video Background */
 .video-background {
     position: fixed;
     top: 0;
@@ -445,10 +430,9 @@ h2 {
     left: 50%;
     transform: translate(-50%, -50%);
     object-fit: cover;
-    opacity: 0.2; /* Darkened from 0.25 to 0.2 */
+    opacity: 0.2;
 }
 
-/* Updated grain overlay with pixelated black squares */
 .grain-overlay {
     position: fixed;
     top: 0;
@@ -456,26 +440,23 @@ h2 {
     width: 100%;
     height: 100%;
     z-index: -1;
-    opacity: 0.1; /* Adjusted for pixel effect visibility */
+    opacity: 0.1;
     pointer-events: none;
     
-    /* Pixelated pattern using repeating-conic-gradient */
     background-image: 
         repeating-conic-gradient(#000 0% 25%, transparent 0% 50%),
         repeating-conic-gradient(#000 0% 25%, transparent 0% 50%);
     background-position: 0 0, 2px 2px;
     background-size: 4px 4px;
-    image-rendering: pixelated; /* Critical for the pixelated look */
+    image-rendering: pixelated;
     -webkit-mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
-/* Ensure all your content cards have appropriate background opacity */
 .card {
-    background-color: rgba(22, 27, 34, 0.85); /* Slightly transparent background */
-    backdrop-filter: blur(5px); /* Add slight blur to background */
+    background-color: rgba(22, 27, 34, 0.85);
+    backdrop-filter: blur(5px);
 }
 
-/* Adjust the page container to sit above the video */
 .page-container {
     position: relative;
     z-index: 1;
@@ -496,7 +477,7 @@ h2 {
     z-index: 10;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
     opacity: 0;
-    transition: opacity 1s ease 2s; /* Delay increased to account for slower card animations */
+    transition: opacity 1s ease 2s;
 }
 
 .volume-icon {
@@ -511,7 +492,6 @@ h2 {
     flex-shrink: 0;
 }
 
-/* Make the icon more visible */
 .volume-icon i {
     display: inline-block;
     font-size: 18px;
@@ -535,7 +515,6 @@ h2 {
     margin: 0;
 }
 
-/* Styling the slider thumb */
 .volume-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
