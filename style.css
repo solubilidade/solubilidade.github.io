@@ -1,0 +1,568 @@
+:root {
+    --bg-color: #0d1117;
+    --card-bg: #161b22;
+    --card-bg-lighter: #1c232d;
+    --primary-text: #f0f6fc;
+    --secondary-text: #8b949e;
+    --accent-color: #58a6ff;
+    --subtitle-text: #6e7681; /* Darker text for subtitle */
+    --hover-bg: rgba(255, 255, 255, 0.05);
+    --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    --item-bg: rgba(56, 139, 253, 0.1);
+    --item-color: #58a6ff;
+    
+    /* Tech logo glow colors */
+    --cpp-color: #00599C;
+    --csharp-color: #9B4F96;
+    --c-color: #283593;
+    --javascript-color: #F7DF1E;
+    --lua-color: #2C2D72;
+    --typescript-color: #3178C6;
+    --nodejs-color: #339933;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Entry Screen - Updated */
+.entry-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: opacity 0.8s ease, visibility 0.8s;
+}
+
+.entry-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Reduced from 20px to bring elements closer */
+}
+
+.entry-text {
+    color: var(--primary-text);
+    font-size: 2.1rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 
+                0 0 20px rgba(255, 255, 255, 0.5),
+                0 0 30px rgba(255, 255, 255, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.entry-subtext {
+    color: rgba(255, 255, 255, 0.6); /* Darkened from 0.7 to 0.6 */
+    font-size: 1.1rem;
+    font-style: italic;
+    letter-spacing: 1px;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+    padding: 0 20px;
+    margin-top: -5px; /* Additional negative margin to pull it closer */
+}
+
+.entry-screen:hover .entry-text {
+    transform: scale(1.05);
+}
+
+/* Hidden class to remove the entry screen */
+.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* IMPORTANT: Box fade-in animation (was missing before) */
+/* Hide profile boxes initially */
+.card {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 2s ease, transform 2s ease; /* Changed from 1.2s to 2s */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+/* Class to show profile boxes with fade-in effect */
+.show-cards .card {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Staggered animation for cards - slower transitions */
+.show-cards .card:nth-child(1) { transition-delay: 0.2s; }
+.show-cards .card:nth-child(2) { transition-delay: 0.4s; }
+.show-cards .card:nth-child(3) { transition-delay: 0.6s; }
+.show-cards .card:nth-child(4) { transition-delay: 0.8s; }
+.show-cards .card:nth-child(5) { transition-delay: 1.0s; }
+.show-cards .card:nth-child(6) { transition-delay: 1.2s; }
+.show-cards .card:nth-child(7) { transition-delay: 1.4s; }
+.show-cards .card:nth-child(8) { transition-delay: 1.6s; }
+
+.card:hover {
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+}
+
+
+/* Volume control should also start hidden and fade in */
+.volume-control {
+    opacity: 0;
+    transition: opacity 1s ease 1.5s;
+    /* Keep all other volume control styles */
+}
+
+.show-cards .volume-control {
+    opacity: 1;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--primary-text);
+    line-height: 1.6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 2rem;
+}
+
+/* Overall page fade-in effect */
+.page-container {
+    width: 100%;
+    opacity: 0;
+    animation: pageLoad 1s ease-in forwards;
+}
+
+@keyframes pageLoad {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.card {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    padding: 1.8rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Subtle zoom effect on card hover */
+.card:hover {
+    transform: scale(1.02);
+    box-shadow: var(--card-shadow);
+}
+
+.profile-card {
+    width: 100%;
+    max-width: 700px;
+    padding: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+    width: 100%;
+}
+
+.left-column {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.profile-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--accent-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-picture:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 20px rgba(88, 166, 255, 0.5);
+}
+
+.username {
+    margin-top: 1rem;
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--primary-text);
+    text-align: center;
+}
+
+.subtitle {
+    margin-top: 0.25rem;
+    font-size: 1rem;
+    color: var(--subtitle-text);
+    /* Removed italic styling */
+    height: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cursor {
+    display: inline-block;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+h2 {
+    font-size: 1.25rem;
+    color: var(--secondary-text);
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+.learning-items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 0.5rem;
+}
+
+.tech-logo-container {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    background-color: var(--item-bg);
+    padding: 8px;
+    transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+    cursor: pointer;
+    opacity: 1;
+    border: 1px solid var(--card-bg-lighter);
+}
+
+.tech-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.tech-logo-container:hover {
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 0 15px var(--glow-color);
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--card-bg-lighter);
+}
+
+.discord-card {
+    padding: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.discord-embed,
+.spotify-embed {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    width: 100%;
+}
+
+.spotify-embed a {
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+.embed-image {
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+    max-width: 350px;
+}
+
+.embed-image:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.discord-image {
+    width: 100%;
+    height: auto;
+    max-width: 460px; /* Made even bigger */
+}
+
+.spotify-image {
+    width: 100%;
+    height: auto;
+}
+
+/* Goals list styling - no dots and closer spacing */
+.goals-list {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.goals-list li {
+    margin-bottom: 0.6rem;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.goals-list li span {
+    text-align: center;
+    display: block;
+    max-width: 90%;
+}
+
+.goals-list li:last-child {
+    margin-bottom: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1100px) {
+    .content-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .right-column {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 768px) {
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .right-column {
+        grid-column: auto;
+    }
+    
+    .card {
+        padding: 1.5rem;
+    }
+    
+    .discord-image {
+        max-width: 380px; /* Slightly smaller on mobile */
+    }
+}
+
+@media (max-width: 500px) {
+    .profile-card {
+        padding: 1.5rem;
+    }
+    
+    .profile-picture {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .username {
+        font-size: 1.5rem;
+    }
+    
+    .subtitle {
+        font-size: 0.9rem;
+    }
+    
+    .learning-items {
+        gap: 1rem;
+    }
+    
+    .tech-logo-container {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .discord-image {
+        max-width: 340px; /* Adjusted for very small screens */
+    }
+}
+
+/* Video Background */
+.video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    overflow: hidden;
+}
+
+#background-video {
+    position: absolute;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    opacity: 0.2; /* Darkened from 0.25 to 0.2 */
+}
+
+/* Updated grain overlay with pixelated black squares */
+.grain-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.1; /* Adjusted for pixel effect visibility */
+    pointer-events: none;
+    
+    /* Pixelated pattern using repeating-conic-gradient */
+    background-image: 
+        repeating-conic-gradient(#000 0% 25%, transparent 0% 50%),
+        repeating-conic-gradient(#000 0% 25%, transparent 0% 50%);
+    background-position: 0 0, 2px 2px;
+    background-size: 4px 4px;
+    image-rendering: pixelated; /* Critical for the pixelated look */
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Ensure all your content cards have appropriate background opacity */
+.card {
+    background-color: rgba(22, 27, 34, 0.85); /* Slightly transparent background */
+    backdrop-filter: blur(5px); /* Add slight blur to background */
+}
+
+/* Adjust the page container to sit above the video */
+.page-container {
+    position: relative;
+    z-index: 1;
+}
+
+.volume-control {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    padding: 12px 18px;
+    width: auto;
+    height: auto;
+    z-index: 10;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    opacity: 0;
+    transition: opacity 1s ease 2s; /* Delay increased to account for slower card animations */
+}
+
+.volume-icon {
+    font-size: 1.2rem;
+    min-width: 24px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--primary-text);
+    flex-shrink: 0;
+}
+
+/* Make the icon more visible */
+.volume-icon i {
+    display: inline-block;
+    font-size: 18px;
+}
+
+.volume-slider-container {
+    width: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 24px;
+}
+
+.volume-slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 5px;
+    border-radius: 5px;
+    background: var(--card-bg-lighter);
+    outline: none;
+    margin: 0;
+}
+
+/* Styling the slider thumb */
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: var(--accent-color);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.volume-slider::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: var(--accent-color);
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+}
+
+.volume-slider::-webkit-slider-thumb:hover,
+.volume-slider::-moz-range-thumb:hover {
+    transform: scale(1.15);
+    box-shadow: 0 0 8px rgba(88, 166, 255, 0.5);
+}
+
+.show-cards .volume-control {
+    opacity: 1;
+}
